@@ -1,8 +1,8 @@
 // App.tsx
 import React from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
-import Home from './components/home';  // Check the correct path and file name
-import About from './components/game';  // Check the correct path and file name
+import Home from './components/home';  
+import About from './components/game';  
 
 const App: React.FC = () => {
   return (
