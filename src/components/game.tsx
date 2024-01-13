@@ -223,7 +223,7 @@ const caesar_cipher_decrypt = (word: string, shift: number): string => {
 
   return (
     <div>
-      <h1 className='text-center mt-12'>CONTEXTO FOR MUMBO</h1>
+      <h1 className='text-center mt-12'>CONTEXTO</h1>
 
 
       <div className="flex justify-center mt-8">
