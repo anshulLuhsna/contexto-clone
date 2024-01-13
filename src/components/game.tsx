@@ -1,5 +1,5 @@
 
-import React, { useState, useEffect, ChangeEvent } from 'react';
+import React, { useState, useEffect, ChangeEvent, KeyboardEventHandler } from 'react';
 import { Button, Select } from 'flowbite-react';
 import { Label, TextInput } from 'flowbite-react';
 import "../styles.css"
@@ -26,11 +26,13 @@ interface MyComponentState {
   showCorrectAnswer: boolean;
   rank: number | null;
   correctWordEntered: boolean;
+  keyPress: string;
 }
 
 const About: React.FC = () => {
   const [state, setState] = useState<MyComponentState>({
     inputValue: '',
+    keyPress:'',
     selectedLevel: 1,
     levels: Array.from({ length: 10 }, (_, i) => i + 1),
     correctWords: {
@@ -59,8 +61,9 @@ const About: React.FC = () => {
   }, [state.correctWordEntered]);
 
   const handleInputChange = (event: ChangeEvent<HTMLInputElement>) => {
-  
+    
     setState({ ...state, inputValue: event.target.value });
+
   };
 
   const handleLevelChange = (value: number) => {
@@ -131,6 +134,12 @@ const About: React.FC = () => {
     return 'red';
   };
   
+  const handleKeyPress = (event: React.KeyboardEvent<HTMLInputElement>) => {
+    if(event.key === "Enter"){
+      handleAddToGuessArray()
+    }
+  };
+
 
   return (
     <div>
@@ -160,6 +169,7 @@ const About: React.FC = () => {
           <div className="bg-black">
             <TextInput
               onChange={handleInputChange}
+              onKeyDown={(e)=>handleKeyPress(e)}
               id="small"
               type="text"
               sizing="sm"
@@ -167,13 +177,29 @@ const About: React.FC = () => {
             />
           </div>
         </div>
-        <Button onClick={handleAddToGuessArray} className="mt-6">
+        <Button onClick={handleAddToGuessArray} className="mt-6 bg-zinc-700">
           Enter
         </Button>
         
       </div>
 
-      
+      {state.showCorrectAnswer && (
+        <div className="text-center mt-4">
+          <p>Correct Answer: {state.correctWords[state.selectedLevel]}</p>
+        </div>
+      )}
+
+      {state.rank !== null && (
+        <div className="text-center mt-4 text-gray-400">
+          <p>Rank for "{state.inputValue}": {state.rank}</p>
+        </div>
+      )}
+
+      {state.correctWordEntered && (
+        <div className="text-center mt-4">
+          <p>Correct word entered! Moving to the next level...</p>
+        </div>
+      )}
 
       {state.guessArray.length > 0 && (
         <div className="text-center mt-4 flex flex-col items-center text-black">
@@ -195,23 +221,7 @@ const About: React.FC = () => {
         </div>
       )}
 
-      {state.showCorrectAnswer && (
-        <div className="text-center mt-4">
-          <p>Correct Answer: {state.correctWords[state.selectedLevel]}</p>
-        </div>
-      )}
-
-      {state.rank !== null && (
-        <div className="text-center mt-4 text-gray-400">
-          <p>Rank for "{state.inputValue}": {state.rank}</p>
-        </div>
-      )}
-
-      {state.correctWordEntered && (
-        <div className="text-center ">
-          <p>Correct word entered! Moving to the next level...</p>
-        </div>
-      )}
+      
     </div>
   );
 };
