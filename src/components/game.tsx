@@ -223,7 +223,7 @@ const caesar_cipher_decrypt = (word: string, shift: number): string => {
       <h1 className='text-center mt-12'>CONTEXTO</h1>
 
 
-      <div className="flex justify-center mt-8">
+      <div className="flex justify-center mt-4">
         <select
           value={state.selectedLevel}
           onChange={(event) => handleLevelChange(Number(event.target.value))}
@@ -240,10 +240,10 @@ const caesar_cipher_decrypt = (word: string, shift: number): string => {
       
       <div className="flex justify-center mt-4 flex-col items-center">
         <div>
-          <div className="mb-2 block">
-            <Label htmlFor="small" value="Enter word" />
+          <div className="mb-2 block mt-4">
+            <Label htmlFor="small" value="Enter word" className='text-white text-xl text-center mt-4' />
           </div>
-          <div className="bg-black">
+          <div className="text-white">
             <TextInput
             value={state.inputValue}
               onChange={handleInputChange}
@@ -251,7 +251,7 @@ const caesar_cipher_decrypt = (word: string, shift: number): string => {
               id="small"
               type="text"
               sizing="sm"
-              className='text-white bg-black'
+              className='text-white text-2xl'
             />
           </div>
         </div>
