@@ -76,16 +76,16 @@ const caesar_cipher_decrypt = (word: string, shift: number): string => {
     selectedLevel: 1,
     levels: Array.from({ length: 10 }, (_, i) => i + 1),
     correctWords: {
-      1: "uhmxyhqdwh", //rejuvenate
-      2: "lqqdwh", //innate
-      3: "edvn", //bask
-      4: "krph", //home
-      5: "srhp", //poem
-      6: "duw", // art
-      7: "vhuhqglslwb", //serendipity
-      8: "vxqvhw", //sunset
-      9: "eolqg", //blind
-      10: "jbp", //gym
+      1: "uhmxyhqdwh", 
+      2: "lqqdwh", 
+      3: "edvn", 
+      4: "krph", 
+      5: "srhp", 
+      6: "duw", 
+      7: "vhuhqglslwb", 
+      8: "vxqvhw", 
+      9: "eolqg", 
+      10: "jbp", 
     },
     showEnteredWord: false,
     guessArray: [],
@@ -134,7 +134,7 @@ const caesar_cipher_decrypt = (word: string, shift: number): string => {
         return a.rank - b.rank;
       });
   
-      // console.log(caesar_cipher_decrypt(state.correctWords[state.selectedLevel], 3))
+      
       let correctWordEntered = caesar_cipher_decrypt(state.correctWords[state.selectedLevel], 3) === state.inputValue;
   
       setState({
@@ -144,7 +144,7 @@ const caesar_cipher_decrypt = (word: string, shift: number): string => {
         correctWordEntered: correctWordEntered,
       });
   
-      // Delay the level change to ensure that correctWordEntered has been set in state
+      
       setTimeout(() => {
         if (correctWordEntered) {
           handleLevelChange(state.selectedLevel + 1);
@@ -159,9 +159,7 @@ const caesar_cipher_decrypt = (word: string, shift: number): string => {
   
 
 
-  const handleShowCorrectAnswer = () => {
-    setState({ ...state, showCorrectAnswer: true });
-  };
+  
 
   const fetchRank = (word: string): Promise<number | null> => {
     const wordVectorsArray = [
@@ -185,14 +183,13 @@ const caesar_cipher_decrypt = (word: string, shift: number): string => {
             const decryptedWord = caesar_cipher_decrypt(item.word, 3).trim();
             console.log('Trimmed Decrypted Word in File:', decryptedWord);
 
-            // Compare the trimmed, encrypted user input with the trimmed, encrypted word in the file
+            
             return item.word.trim() === encryptedInput;
         });
 
-        // Log the found word and its rank to the console for debugging
         console.log('Found Word:', foundWord);
 
-        // Resolve with the rank or null
+     
         resolve(foundWord ? foundWord.rank : null);
     });
 };
